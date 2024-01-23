@@ -1,0 +1,88 @@
+# Configuration for Release Drafter: https://github.com/toolmantim/release-drafter
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+# Emoji reference: https://gitmoji.carloscuesta.me/
+categories:
+  - title: 💥 Breaking changes
+    labels:
+      - breaking
+  - title: 🚨 Removed
+    labels:
+      - removed
+  - title: ⚠️ Deprecated
+    labels:
+      - deprecated
+  - title: 🚀 New features and improvements
+    labels:
+      - enhancement
+      - feature
+  - title: 🐛 Bug fixes
+    labels:
+      - bug
+      - fix
+      - bugfix
+      - regression
+  - title: 🌐 Localization and translation
+    labels:
+      - localization
+  - title: 👷 Changes for plugin developers
+    labels:
+      - developer
+  - title: 📝 Documentation updates
+    labels:
+      - documentation
+  - title: 👻 Maintenance
+    labels:
+      - chore
+      - internal
+      - maintenance
+  - title: 🚦 Tests
+    labels:
+      - test
+      - tests
+  - title: ✍ Other changes
+  # Default label used by Dependabot
+  - title: 📦 Dependency updates
+    labels:
+      - dependencies
+    collapse-after: 15
+exclude-labels:
+  - no-changelog
+  - skip-changelog
+  - invalid
+
+change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
+# https://github.com/release-drafter/release-drafter?tab=readme-ov-file#version-resolver
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+
+template: |
+  <!-- Optional: add a release summary here -->
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+
+autolabeler:
+  - label: 'documentation'
+    files:
+      - '*.md'
+    branch:
+      - '/docs{0,1}\/.+/'
+  - label: 'bug'
+    branch:
+      - '/fix\/.+/'
+    title:
+      - '/fix/i'
+  - label: 'enhancement'
+    branch:
+      - '/feature\/.+/'
