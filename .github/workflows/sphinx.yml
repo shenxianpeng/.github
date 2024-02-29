@@ -1,0 +1,38 @@
+name: Sphinx Deploy
+
+on:
+  workflow_call:
+    inputs:
+      path-to-doc:
+        required: true
+        type: string
+        default: docs/_build/html
+        description: The docs path name
+
+jobs:
+  sphinx-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Install dependencies
+        run: pip install -r docs/requirements.txt -e .
+
+      - name: Build docs
+        run: sphinx-build docs ${{ inputs.path-to-doc }}
+
+      - name: Upload docs build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}_docs
+          path: ${{ github.workspace }}/${{ inputs.path-to-doc }}
+
+      - name: Upload to github pages
+        # only publish doc changes from main branch
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./${{ inputs.path-to-doc }}

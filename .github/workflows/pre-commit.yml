@@ -1,0 +1,29 @@
+name: Run pre-commit
+
+on:
+  workflow_call:
+     inputs:
+      commands:
+        required: false
+        type: string
+        default: ""
+        description: run additional commands for preparing the environment
+
+jobs:
+  run-pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: python-setup
+        with:
+          python-version: '3.x'
+      - name: Run commands
+        if: inputs.commands
+        run: ${{ inputs.commands }}
+      - name: Cache pre-commit environments
+        uses: actions/cache@v4
+        with:
+          path: '~/.cache/pre-commit'
+          key: pre-commit-${{ steps.python-setup.outputs.python-version }}-${{ hashFiles('.pre-commit-config.yaml') }}
+      - run: pipx run pre-commit run --show-diff-on-failure --color=always --all-files
