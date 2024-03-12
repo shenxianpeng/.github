@@ -30,14 +30,14 @@ jobs:
       run: twine check dist/*
 
     - name: Publish package (to TestPyPI)
-      if: github.event_name == 'workflow_dispatch' && startsWith(github.repository, 'cpp-linter')
+      if: github.event_name == 'workflow_dispatch' && startsWith(github.repository, 'shenxianpeng')
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
       run: twine upload --repository testpypi dist/*
 
     - name: Publish package (to PyPI)
-      if: github.event_name != 'workflow_dispatch' && startsWith(github.repository, 'cpp-linter')
+      if: github.event_name != 'workflow_dispatch' && startsWith(github.repository, 'shenxianpeng')
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
