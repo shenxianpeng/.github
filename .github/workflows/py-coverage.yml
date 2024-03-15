@@ -26,7 +26,7 @@ jobs:
       - name: Create coverage report
         run: |
           pip3 install coverage[toml]
-          coverage combine
+          # coverage combine
           coverage html
 
       - name: Upload comprehensive coverage HTML report
