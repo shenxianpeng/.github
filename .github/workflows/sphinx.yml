@@ -24,7 +24,7 @@ jobs:
         run: sphinx-build docs ${{ inputs.path-to-doc }}
 
       - name: Upload docs build as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ github.event.repository.name }}_docs
           path: ${{ github.workspace }}/${{ inputs.path-to-doc }}
