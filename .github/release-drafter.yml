@@ -10,6 +10,13 @@ categories:
   - title: 🚨 Removed
     labels:
       - removed
+  - title: 🎉 Major features and improvements
+    labels:
+      - major-enhancement
+      - major-rfe
+  - title: 🐛 Major bug fixes
+    labels:
+      - major-bug
   - title: ⚠️ Deprecated
     labels:
       - deprecated
