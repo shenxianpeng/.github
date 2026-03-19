@@ -9,5 +9,7 @@ jobs:
     steps:
       # Draft your next Release notes as Pull Requests are merged into the default branch
       - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: github:shenxianpeng/.github:/.github/release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
