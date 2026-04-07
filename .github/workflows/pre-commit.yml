@@ -2,7 +2,7 @@ name: Run pre-commit
 
 on:
   workflow_call:
-     inputs:
+    inputs:
       commands:
         required: false
         type: string
