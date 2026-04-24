@@ -1,5 +1,3 @@
-## Description
-
 <!-- Provide a concise summary of the changes and the motivation behind them. -->
 
 ## Type of Change
@@ -14,11 +12,10 @@
 
 ## Related Issues
 
-<!-- Link any related issues here, e.g. Closes #123 -->
+<!-- Link any related issues here, e.g., Closes #123 -->
 
 ## Checklist
 
-- [ ] My changes follow the project's coding style
 - [ ] I have performed a self-review of my own changes
 - [ ] I have added or updated tests where applicable
 - [ ] I have updated documentation where applicable
