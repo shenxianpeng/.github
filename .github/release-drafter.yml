@@ -60,6 +60,9 @@ exclude-labels:
   - invalid
 
 change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
+replacers:
+  - search: '/ by @\S+\[bot\]/g'
+    replace: ''
 # https://github.com/release-drafter/release-drafter?tab=readme-ov-file#version-resolver
 version-resolver:
   major:
