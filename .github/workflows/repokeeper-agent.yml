@@ -1,0 +1,57 @@
+name: RepoKeeper Implementation Agent
+
+on:
+  workflow_call:
+    inputs:
+      repo:
+        required: true
+        type: string
+        description: "GitHub repository as owner/name"
+      issue_number:
+        required: true
+        type: string
+        description: "GitHub issue number to implement"
+      python_version:
+        required: false
+        type: string
+        default: "3.10"
+        description: "Python version for the runner"
+    secrets:
+      deepseek_api_key:
+        required: true
+        description: "DeepSeek (or OpenAI-compatible) API key"
+      github_token:
+        required: true
+        description: "GitHub token with contents:write, issues:write, pull-requests:write"
+      llm_base_url:
+        required: false
+        description: "Optional: OpenAI-compatible API base URL (defaults to https://api.deepseek.com)"
+
+jobs:
+  agent:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Install RepoKeeper
+        run: pip install repokeeper
+
+      - name: Run RepoKeeper Agent
+        env:
+          PYTHONUNBUFFERED: 1
+          DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
+          REPOKEEPER_GITHUB_TOKEN: ${{ secrets.github_token }}
+          GITHUB_REPOSITORY: ${{ inputs.repo }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          LLM_BASE_URL: ${{ secrets.llm_base_url || 'https://api.deepseek.com' }}
+        run: repokeeper agent --repo "$GITHUB_REPOSITORY" --issue "$ISSUE_NUMBER"

@@ -1,0 +1,71 @@
+name: RepoKeeper Community Radar
+
+on:
+  workflow_call:
+    inputs:
+      repo:
+        required: true
+        type: string
+        description: "GitHub repository as owner/name"
+      python_version:
+        required: false
+        type: string
+        default: "3.10"
+        description: "Python version for the runner"
+    secrets:
+      deepseek_api_key:
+        required: true
+        description: "DeepSeek (or OpenAI-compatible) API key for LLM classification"
+      github_token:
+        required: true
+        description: "GitHub token with issues:write, discussions:read, contents:read"
+      smtp_host:
+        required: false
+        description: "Optional: SMTP host for email notifications"
+      smtp_port:
+        required: false
+        description: "Optional: SMTP port (default 587)"
+      smtp_user:
+        required: false
+        description: "Optional: SMTP username"
+      smtp_pass:
+        required: false
+        description: "Optional: SMTP password"
+      telegram_chat_id:
+        required: false
+        description: "Optional: Telegram chat ID for notifications"
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      discussions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Install RepoKeeper
+        run: pip install repokeeper
+
+      - name: Run Community Radar
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+          GITHUB_REPOSITORY: ${{ inputs.repo }}
+          RKP_SMTP_HOST: ${{ secrets.smtp_host || '' }}
+          RKP_SMTP_PORT: ${{ secrets.smtp_port || '587' }}
+          RKP_SMTP_USER: ${{ secrets.smtp_user || '' }}
+          RKP_SMTP_PASS: ${{ secrets.smtp_pass || '' }}
+          RKP_TELEGRAM_CHAT_ID: ${{ secrets.telegram_chat_id || '' }}
+        run: repokeeper radar --repo "$GITHUB_REPOSITORY" --summary | tee radar-summary.md "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload radar summary
+        uses: actions/upload-artifact@v7
+        with:
+          name: radar-summary
+          path: radar-summary.md

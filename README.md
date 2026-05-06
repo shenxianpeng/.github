@@ -112,6 +112,62 @@ jobs:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 ```
 
+### [`repokeeper-agent.yml`](.github/workflows/repokeeper-agent.yml)
+
+[RepoKeeper](https://github.com/shenxianpeng/repokeeper) Implementation Agent — AI reads your codebase + issue, implements a fix, and opens a PR.
+
+```yaml
+jobs:
+  agent:
+    uses: shenxianpeng/.github/.github/workflows/repokeeper-agent.yml@main
+    with:
+      repo: owner/repo
+      issue_number: "42"
+      python_version: "3.10"         # default: 3.10
+    secrets:
+      deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+      github_token: ${{ secrets.REPOKEEPER_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
+      llm_base_url: ${{ secrets.LLM_BASE_URL }}  # optional, defaults to https://api.deepseek.com
+```
+
+### [`repokeeper-radar.yml`](.github/workflows/repokeeper-radar.yml)
+
+[RepoKeeper](https://github.com/shenxianpeng/repokeeper) Community Radar — monitors GitHub issues & discussions, AI-classifies hits, and notifies you.
+
+```yaml
+jobs:
+  radar:
+    uses: shenxianpeng/.github/.github/workflows/repokeeper-radar.yml@main
+    with:
+      repo: owner/repo
+      python_version: "3.10"         # default: 3.10
+    secrets:
+      deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+      smtp_host: ${{ secrets.RKP_SMTP_HOST }}           # optional
+      smtp_port: ${{ secrets.RKP_SMTP_PORT }}           # optional
+      smtp_user: ${{ secrets.RKP_SMTP_USER }}           # optional
+      smtp_pass: ${{ secrets.RKP_SMTP_PASS }}           # optional
+      telegram_chat_id: ${{ secrets.RKP_TELEGRAM_CHAT_ID }}  # optional
+```
+
+### [`repokeeper-patrol.yml`](.github/workflows/repokeeper-patrol.yml)
+
+[RepoKeeper](https://github.com/shenxianpeng/repokeeper) Daily Patrol — scans outdated deps (8 ecosystems), diagnoses CI failures, finds stale issues, and auto-fixes CI.
+
+```yaml
+jobs:
+  patrol:
+    uses: shenxianpeng/.github/.github/workflows/repokeeper-patrol.yml@main
+    with:
+      repo: owner/repo
+      python_version: "3.10"         # default: 3.10
+      repo_path: "."                 # default: .
+    secrets:
+      deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ## Community Health Files
 
 The following default community health files apply to all repositories in the account that do not have their own:
