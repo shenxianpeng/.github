@@ -43,7 +43,7 @@ jobs:
       - name: Install RepoKeeper
         run: pip install repokeeper
 
-      - name: Run Daily Patrol
+      - name: Run RepoKeeper Patrol
         env:
           DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
           GITHUB_TOKEN: ${{ secrets.repo_token }}
