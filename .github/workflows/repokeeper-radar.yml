@@ -16,7 +16,7 @@ on:
       deepseek_api_key:
         required: true
         description: "DeepSeek (or OpenAI-compatible) API key for LLM classification"
-      github_token:
+      repo_token:
         required: true
         description: "GitHub token with issues:write, discussions:read, contents:read"
       smtp_host:
@@ -55,7 +55,7 @@ jobs:
       - name: Run Community Radar
         env:
           DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
-          GITHUB_TOKEN: ${{ secrets.github_token }}
+          GITHUB_TOKEN: ${{ secrets.repo_token }}
           GITHUB_REPOSITORY: ${{ inputs.repo }}
           RKP_SMTP_HOST: ${{ secrets.smtp_host || '' }}
           RKP_SMTP_PORT: ${{ secrets.smtp_port || '587' }}

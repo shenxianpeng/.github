@@ -21,7 +21,7 @@ on:
       deepseek_api_key:
         required: true
         description: "DeepSeek (or OpenAI-compatible) API key"
-      github_token:
+      repo_token:
         required: true
         description: "GitHub token with issues:read, pull-requests:write, contents:write, actions:read"
 
@@ -46,7 +46,7 @@ jobs:
       - name: Run Daily Patrol
         env:
           DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
-          GITHUB_TOKEN: ${{ secrets.github_token }}
+          GITHUB_TOKEN: ${{ secrets.repo_token }}
           GITHUB_REPOSITORY: ${{ inputs.repo }}
         run: repokeeper patrol --repo "$GITHUB_REPOSITORY" --summary | tee patrol-summary.md "$GITHUB_STEP_SUMMARY"
 
