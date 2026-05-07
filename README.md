@@ -126,7 +126,7 @@ jobs:
       python_version: "3.10"         # default: 3.10
     secrets:
       deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
-      github_token: ${{ secrets.REPOKEEPER_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
+      repo_token: ${{ secrets.REPOKEEPER_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
       llm_base_url: ${{ secrets.LLM_BASE_URL }}  # optional, defaults to https://api.deepseek.com
 ```
 
@@ -143,7 +143,7 @@ jobs:
       python_version: "3.10"         # default: 3.10
     secrets:
       deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      repo_token: ${{ secrets.GITHUB_TOKEN }}
       smtp_host: ${{ secrets.RKP_SMTP_HOST }}           # optional
       smtp_port: ${{ secrets.RKP_SMTP_PORT }}           # optional
       smtp_user: ${{ secrets.RKP_SMTP_USER }}           # optional
@@ -165,7 +165,7 @@ jobs:
       repo_path: "."                 # default: .
     secrets:
       deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      repo_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Community Health Files

@@ -20,7 +20,7 @@ on:
       deepseek_api_key:
         required: true
         description: "DeepSeek (or OpenAI-compatible) API key"
-      github_token:
+      repo_token:
         required: true
         description: "GitHub token with contents:write, issues:write, pull-requests:write"
       llm_base_url:
@@ -50,7 +50,7 @@ jobs:
         env:
           PYTHONUNBUFFERED: 1
           DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
-          REPOKEEPER_GITHUB_TOKEN: ${{ secrets.github_token }}
+          REPOKEEPER_GITHUB_TOKEN: ${{ secrets.repo_token }}
           GITHUB_REPOSITORY: ${{ inputs.repo }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
           LLM_BASE_URL: ${{ secrets.llm_base_url || 'https://api.deepseek.com' }}
