@@ -7,16 +7,6 @@ on:
         required: true
         type: string
         description: "GitHub repository as owner/name"
-      python_version:
-        required: false
-        type: string
-        default: "3.10"
-        description: "Python version for the runner"
-      repo_path:
-        required: false
-        type: string
-        default: "."
-        description: "Local repository path for dependency scanning"
     secrets:
       deepseek_api_key:
         required: true
@@ -34,24 +24,9 @@ jobs:
       contents: write
       actions: read
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-python@v6
+      - name: Run Daily Patrol
+        uses: shenxianpeng/repokeeper/patrol@v1
         with:
-          python-version: ${{ inputs.python_version }}
-
-      - name: Install RepoKeeper
-        run: pip install repokeeper
-
-      - name: Run RepoKeeper Patrol
-        env:
-          DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
-          GITHUB_TOKEN: ${{ secrets.repo_token }}
-          GITHUB_REPOSITORY: ${{ inputs.repo }}
-        run: repokeeper patrol --repo "$GITHUB_REPOSITORY" --summary | tee patrol-summary.md "$GITHUB_STEP_SUMMARY"
-
-      - name: Upload patrol summary
-        uses: actions/upload-artifact@v7
-        with:
-          name: patrol-summary
-          path: patrol-summary.md
+          repo: ${{ inputs.repo }}
+          llm_api_key: ${{ secrets.deepseek_api_key }}
+          github_token: ${{ secrets.github_token }}

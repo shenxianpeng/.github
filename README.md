@@ -51,6 +51,41 @@ jobs:
     uses: shenxianpeng/.github/.github/workflows/pr-labeler.yml@main
 ```
 
+### [`repokeeper-labeler.yml`](.github/workflows/repokeeper-labeler.yml)
+
+[RepoKeeper](https://github.com/shenxianpeng/repokeeper) Auto-Labeler — AI classifies issues and pull requests using your repository's existing labels.
+
+```yaml
+jobs:
+  labeler:
+    uses: shenxianpeng/.github/.github/workflows/repokeeper-labeler.yml@main
+    with:
+      repo: owner/repo
+      issue: "42"  # optional; use pr: "42" for a pull request
+    secrets:
+      deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Or call the published action directly:
+
+```yaml
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: shenxianpeng/repokeeper/labeler@v1
+        with:
+          repo: owner/repo
+          issue: "42"
+          llm_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ### [`stale.yml`](.github/workflows/stale.yml)
 
 Close stale issues and pull requests automatically.
@@ -123,11 +158,29 @@ jobs:
     with:
       repo: owner/repo
       issue_number: "42"
-      python_version: "3.10"         # default: 3.10
     secrets:
       deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
       repo_token: ${{ secrets.REPOKEEPER_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
       llm_base_url: ${{ secrets.LLM_BASE_URL }}  # optional, defaults to https://api.deepseek.com
+```
+
+Or call the published action directly:
+
+```yaml
+jobs:
+  agent:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: shenxianpeng/repokeeper/agent@v1
+        with:
+          repo: owner/repo
+          issue: "42"
+          llm_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+          github_token: ${{ secrets.REPOKEEPER_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
 ```
 
 ### [`repokeeper-radar.yml`](.github/workflows/repokeeper-radar.yml)
@@ -140,15 +193,27 @@ jobs:
     uses: shenxianpeng/.github/.github/workflows/repokeeper-radar.yml@main
     with:
       repo: owner/repo
-      python_version: "3.10"         # default: 3.10
     secrets:
       deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
-      repo_token: ${{ secrets.GITHUB_TOKEN }}
-      smtp_host: ${{ secrets.RKP_SMTP_HOST }}           # optional
-      smtp_port: ${{ secrets.RKP_SMTP_PORT }}           # optional
-      smtp_user: ${{ secrets.RKP_SMTP_USER }}           # optional
-      smtp_pass: ${{ secrets.RKP_SMTP_PASS }}           # optional
-      telegram_chat_id: ${{ secrets.RKP_TELEGRAM_CHAT_ID }}  # optional
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Or call the published action directly:
+
+```yaml
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      discussions: read
+      contents: read
+    steps:
+      - uses: shenxianpeng/repokeeper/radar@v1
+        with:
+          repo: owner/repo
+          llm_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### [`repokeeper-patrol.yml`](.github/workflows/repokeeper-patrol.yml)
@@ -161,11 +226,28 @@ jobs:
     uses: shenxianpeng/.github/.github/workflows/repokeeper-patrol.yml@main
     with:
       repo: owner/repo
-      python_version: "3.10"         # default: 3.10
-      repo_path: "."                 # default: .
     secrets:
       deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
       repo_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Or call the published action directly:
+
+```yaml
+jobs:
+  patrol:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: read
+      pull-requests: write
+      contents: write
+      actions: read
+    steps:
+      - uses: shenxianpeng/repokeeper/patrol@v1
+        with:
+          repo: owner/repo
+          llm_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Community Health Files

@@ -11,11 +11,6 @@ on:
         required: true
         type: string
         description: "GitHub issue number to implement"
-      python_version:
-        required: false
-        type: string
-        default: "3.10"
-        description: "Python version for the runner"
     secrets:
       deepseek_api_key:
         required: true
@@ -35,23 +30,11 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-python@v6
-        with:
-          python-version: ${{ inputs.python_version }}
-
-      - name: Install RepoKeeper
-        run: pip install repokeeper
-
       - name: Run RepoKeeper Agent
-        env:
-          PYTHONUNBUFFERED: 1
-          DEEPSEEK_API_KEY: ${{ secrets.deepseek_api_key }}
-          REPOKEEPER_GITHUB_TOKEN: ${{ secrets.repo_token }}
-          GITHUB_REPOSITORY: ${{ inputs.repo }}
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
-          LLM_BASE_URL: ${{ secrets.llm_base_url || 'https://api.deepseek.com' }}
-        run: repokeeper agent --repo "$GITHUB_REPOSITORY" --issue "$ISSUE_NUMBER"
+        uses: shenxianpeng/repokeeper/agent@v1
+        with:
+          repo: ${{ inputs.repo }}
+          issue: ${{ inputs.issue_number }}
+          llm_api_key: ${{ secrets.deepseek_api_key }}
+          llm_base_url: ${{ secrets.llm_base_url || 'https://api.deepseek.com' }}
+          github_token: ${{ secrets.github_token }}
