@@ -19,7 +19,7 @@ on:
       deepseek_api_key:
         required: true
         description: "DeepSeek or OpenAI-compatible API key"
-      github_token:
+      repo_token:
         required: true
         description: "GitHub token with issues:write and pull-requests:write"
 
@@ -40,4 +40,4 @@ jobs:
           issue: ${{ inputs.issue }}
           pr: ${{ inputs.pr }}
           llm_api_key: ${{ secrets.deepseek_api_key }}
-          github_token: ${{ secrets.github_token }}
+          repo_token: ${{ secrets.github_token }}
