@@ -5,92 +5,73 @@ tag-template: 'v$RESOLVED_VERSION'
 # Emoji reference: https://gitmoji.carloscuesta.me/
 categories:
   - title: 💥 Breaking changes
-    when:
-      labels:
-        - breaking
+    labels:
+      - breaking
   - title: 🚨 Removed
-    when:
-      labels:
-        - removed
+    labels:
+      - removed
   - title: 🎉 Major features and improvements
-    when:
-      labels:
-        - major-enhancement
-        - major-rfe
+    labels:
+      - major-enhancement
+      - major-rfe
   - title: 🐛 Major bug fixes
-    when:
-      labels:
-        - major-bug
+    labels:
+      - major-bug
   - title: ⚠️ Deprecated
-    when:
-      labels:
-        - deprecated
+    labels:
+      - deprecated
   - title: 🚀 New features and improvements
-    when:
-      labels:
-        - enhancement
-        - feature
+    labels:
+      - enhancement
+      - feature
   - title: 🐛 Bug fixes
-    when:
-      labels:
-        - bug
-        - fix
-        - bugfix
-        - regression
+    labels:
+      - bug
+      - fix
+      - bugfix
+      - regression
   - title: 🌐 Localization and translation
-    when:
-      labels:
-        - localization
+    labels:
+      - localization
   - title: 👷 Changes for developers
-    when:
-      labels:
-        - developer
+    labels:
+      - developer
   - title: 📝 Documentation updates
-    when:
-      labels:
-        - documentation
+    labels:
+      - documentation
   - title: 👻 Maintenance
-    when:
-      labels:
-        - chore
-        - internal
-        - maintenance
+    labels:
+      - chore
+      - internal
+      - maintenance
   - title: 🚦 Tests
-    when:
-      labels:
-        - test
-        - tests
+    labels:
+      - test
+      - tests
   - title: ✍ Other changes
+  # Default label used by Dependabot
   - title: 📦 Dependency updates
-    when:
-      labels:
-        - dependencies
+    labels:
+      - dependencies
     collapse-after: 15
-  - type: pre-exclude
-    when:
-      labels:
-        - no-changelog
-        - skip-changelog
-        - invalid
-  - type: version-resolver
-    semver-increment: major
-    when:
-      labels:
-        - major
-  - type: version-resolver
-    semver-increment: minor
-    when:
-      labels:
-        - minor
-  - type: version-resolver
-    semver-increment: patch
-    when:
-      labels:
-        - patch
-  - type: version-resolver
-    semver-increment: patch
+exclude-labels:
+  - no-changelog
+  - skip-changelog
+  - invalid
 
 change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
+# https://github.com/release-drafter/release-drafter?tab=readme-ov-file#version-resolver
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
 
 template: |
   <!-- Optional: add a release summary here -->
