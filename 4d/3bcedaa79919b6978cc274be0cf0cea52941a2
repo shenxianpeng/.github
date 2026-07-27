@@ -1,0 +1,19 @@
+.github/release-drafter.yml
+  s_194bbefdb7b7fc::t_a6829d155ee4b6 8-10,12-14,16-19,21-23,25-27,29-32,34-39,41-43,45-47,49-51,53-57,59-62,65-67,69-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "4d3bcedaa79919b6978cc274be0cf0cea52941a2",
+  "prompts": {},
+  "sessions": {
+    "s_194bbefdb7b7fc": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019fa3ce-663c-7759-a60c-a3a53e8eddb2",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
