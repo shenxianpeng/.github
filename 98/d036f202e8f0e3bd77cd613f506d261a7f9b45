@@ -1,0 +1,19 @@
+.github/workflows/zooner.yml
+  s_0cf101ade936b3::t_e3885e0e39f179 21-22,28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "98d036f202e8f0e3bd77cd613f506d261a7f9b45",
+  "prompts": {},
+  "sessions": {
+    "s_0cf101ade936b3": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019fbec1-f685-7154-9aa2-23ec7cd7d7ed",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
