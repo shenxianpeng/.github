@@ -34,7 +34,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Run RepoKeeper Labeler
-        uses: shenxianpeng/repokeeper/labeler@v1
+        uses: shenxianpeng/repokeeper/labeler@df2cc86986f0cc3d29eb978813cffcaa22b4438b # v1.4.0
         with:
           repo: ${{ inputs.repo }}
           issue: ${{ inputs.issue }}
