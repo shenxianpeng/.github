@@ -1,0 +1,23 @@
+.github/actions/zizmor/action.yml
+  s_0cf101ade936b3::t_172e50f83af099 1,4-7,56,58,61,68-72,76-79,82
+.github/workflows/zizmor.yml
+  s_0cf101ade936b3::t_77fed09eb097b3 1,10,18,23-25,28
+README.md
+  s_0cf101ade936b3::t_0f5c5dc393ff0a 255,257,267,272
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "f60211173bef202258f67038c8a4ce41820c2ba8",
+  "prompts": {},
+  "sessions": {
+    "s_0cf101ade936b3": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019fbec1-f685-7154-9aa2-23ec7cd7d7ed",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
