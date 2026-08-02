@@ -1,0 +1,84 @@
+name: "Zooner — GitHub Actions security audit"
+description: >-
+  Scan GitHub Actions workflows and composite actions for security best
+  practices, powered by zizmor. Detects unpinned action references,
+  credential persistence in artifacts, template injection, excessive
+  permissions, and more. Findings are reported as PR annotations
+  (format: github) by default.
+
+inputs:
+  checkout:
+    description: "Check out the repository before scanning."
+    required: false
+    default: "true"
+  path:
+    description: "Path to scan; use '.' for the repository root."
+    required: false
+    default: "."
+  format:
+    description: "Output format: github (PR annotations), plain, json, or sarif."
+    required: false
+    default: "github"
+  persona:
+    description: "Audit persona: regular (fewest false positives), auditor, or pedantic."
+    required: false
+    default: "regular"
+  min_severity:
+    description: "Minimum severity to report: informational, low, medium, or high."
+    required: false
+    default: "low"
+  fail_on_error:
+    description: "Fail the job when zizmor reports findings."
+    required: false
+    default: "true"
+  version:
+    description: "zizmor version to install from PyPI, e.g. 'latest' or '1.29.0'."
+    required: false
+    default: "latest"
+
+outputs:
+  exit-code:
+    description: "zizmor exit code (0 = no findings, non-zero = findings reported)."
+    value: ${{ steps.audit.outputs.exit_code }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check out repository
+      if: ${{ inputs.checkout == 'true' }}
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install zizmor
+      shell: bash
+      env:
+        ZOONER_ZIZMOR_VERSION: ${{ inputs.version }}
+      run: |
+        if [[ "${ZOONER_ZIZMOR_VERSION}" == "latest" ]]; then
+          python3 -m pip install --quiet --disable-pip-version-check zizmor
+        else
+          python3 -m pip install --quiet --disable-pip-version-check "zizmor==${ZOONER_ZIZMOR_VERSION}"
+        fi
+
+    - name: Audit GitHub Actions with zizmor
+      id: audit
+      shell: bash
+      env:
+        ZOONER_PATH: ${{ inputs.path }}
+        ZOONER_FORMAT: ${{ inputs.format }}
+        ZOONER_PERSONA: ${{ inputs.persona }}
+        ZOONER_MIN_SEVERITY: ${{ inputs.min_severity }}
+        ZOONER_FAIL: ${{ inputs.fail_on_error }}
+      run: |
+        set +e
+        zizmor \
+          --format "${ZOONER_FORMAT}" \
+          --persona "${ZOONER_PERSONA}" \
+          --min-severity "${ZOONER_MIN_SEVERITY}" \
+          "${ZOONER_PATH}"
+        exit_code=$?
+        echo "exit_code=${exit_code}" >> "${GITHUB_OUTPUT}"
+        if [[ "${ZOONER_FAIL}" == "true" && ${exit_code} -ne 0 ]]; then
+          exit "${exit_code}"
+        fi

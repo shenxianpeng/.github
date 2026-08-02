@@ -1,0 +1,26 @@
+name: zooner
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - ".github/actions/**"
+      - ".github/workflows/zooner.yml"
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zooner:
+    runs-on: ubuntu-latest
+    steps:
+      # Dogfood the Zooner action on this repository's own workflows.
+      # Advisory mode (fail_on_error: false): findings show up as PR
+      # annotations without blocking; set fail_on_error: true to enforce.
+      - uses: ./.github/actions/zooner
+        with:
+          fail_on_error: false

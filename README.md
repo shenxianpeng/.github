@@ -250,6 +250,40 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+## Reusable Actions
+
+### [`zooner`](.github/actions/zooner/action.yml)
+
+GitHub Actions security audit powered by [zizmor](https://github.com/woodruffw/zizmor).
+Scans workflows and composite actions for security best practices: unpinned
+action references, credential persistence in artifacts, template injection,
+excessive permissions, and more. Findings are reported as PR annotations
+by default.
+
+Use it from any repository:
+
+```yaml
+jobs:
+  zooner:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: shenxianpeng/.github/.github/actions/zooner@main
+```
+
+| Input | Default | Description |
+|-------|---------|-------------|
+| `checkout` | `true` | Check out the repository before scanning |
+| `path` | `.` | Path to scan (use `.` for the repository root) |
+| `format` | `github` | Output format: `github`, `plain`, `json`, `sarif` |
+| `persona` | `regular` | Audit persona: `regular`, `auditor`, `pedantic` |
+| `min_severity` | `low` | Minimum severity: `informational`, `low`, `medium`, `high` |
+| `fail_on_error` | `true` | Fail the job when findings are reported |
+| `version` | `latest` | zizmor version to install from PyPI |
+
+Set `fail_on_error: false` for advisory-only (non-blocking) scans.
+
 ## Community Health Files
 
 The following default community health files apply to all repositories in the account that do not have their own:
