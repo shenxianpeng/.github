@@ -1,0 +1,41 @@
+.github/workflows/codeql.yml
+  s_0cf101ade936b3::t_ea17763e72cd3c 46,50,63,77
+.github/workflows/mkdocs.yml
+  s_0cf101ade936b3::t_6ff21c374b52c5 10-11,21
+.github/workflows/pr-labeler.yml
+  s_0cf101ade936b3::t_9095874adef5b4 15
+.github/workflows/pre-commit.yml
+  s_0cf101ade936b3::t_e8d88240357a65 16-17,25
+.github/workflows/py-publish.yml
+  s_0cf101ade936b3::t_24c2b07752e88d 14,19
+.github/workflows/repokeeper-agent.yml
+  s_0cf101ade936b3::t_563da5335a7402 34
+.github/workflows/repokeeper-labeler.yml
+  s_0cf101ade936b3::t_ed21df488d2437 37
+.github/workflows/repokeeper-patrol.yml
+  s_0cf101ade936b3::t_a454aa06b2f55e 28
+.github/workflows/repokeeper-radar.yml
+  s_0cf101ade936b3::t_5557b706daa58a 27
+.github/workflows/snyk-container.yml
+  s_0cf101ade936b3::t_62f3d8902dd279 28,42
+.github/workflows/sphinx.yml
+  s_0cf101ade936b3::t_cdc52c1ca90025 16-17,27,35
+.github/workflows/stale.yml
+  s_0cf101ade936b3::t_c1cd5865741969 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "404d5a992cb85427c58cd3a256c6543235c77544",
+  "prompts": {},
+  "sessions": {
+    "s_0cf101ade936b3": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019fbec1-f685-7154-9aa2-23ec7cd7d7ed",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
