@@ -1,10 +1,10 @@
-name: "Zooner — GitHub Actions security audit"
+name: "zizmor — GitHub Actions security audit"
 description: >-
   Scan GitHub Actions workflows and composite actions for security best
-  practices, powered by zizmor. Detects unpinned action references,
-  credential persistence in artifacts, template injection, excessive
-  permissions, and more. Findings are reported as PR annotations
-  (format: github) by default.
+  practices with zizmor (https://github.com/zizmorcore/zizmor). Detects
+  unpinned action references, credential persistence in artifacts,
+  template injection, excessive permissions, and more. Findings are
+  reported as PR annotations (format: github) by default.
 
 inputs:
   checkout:
@@ -53,32 +53,32 @@ runs:
     - name: Install zizmor
       shell: bash
       env:
-        ZOONER_ZIZMOR_VERSION: ${{ inputs.version }}
+        ZIZMOR_VERSION: ${{ inputs.version }}
       run: |
-        if [[ "${ZOONER_ZIZMOR_VERSION}" == "latest" ]]; then
+        if [[ "${ZIZMOR_VERSION}" == "latest" ]]; then
           python3 -m pip install --quiet --disable-pip-version-check zizmor
         else
-          python3 -m pip install --quiet --disable-pip-version-check "zizmor==${ZOONER_ZIZMOR_VERSION}"
+          python3 -m pip install --quiet --disable-pip-version-check "zizmor==${ZIZMOR_VERSION}"
         fi
 
     - name: Audit GitHub Actions with zizmor
       id: audit
       shell: bash
       env:
-        ZOONER_PATH: ${{ inputs.path }}
-        ZOONER_FORMAT: ${{ inputs.format }}
-        ZOONER_PERSONA: ${{ inputs.persona }}
-        ZOONER_MIN_SEVERITY: ${{ inputs.min_severity }}
-        ZOONER_FAIL: ${{ inputs.fail_on_error }}
+        ZIZMOR_PATH: ${{ inputs.path }}
+        ZIZMOR_FORMAT: ${{ inputs.format }}
+        ZIZMOR_PERSONA: ${{ inputs.persona }}
+        ZIZMOR_MIN_SEVERITY: ${{ inputs.min_severity }}
+        ZIZMOR_FAIL: ${{ inputs.fail_on_error }}
       run: |
         set +e
         zizmor \
-          --format "${ZOONER_FORMAT}" \
-          --persona "${ZOONER_PERSONA}" \
-          --min-severity "${ZOONER_MIN_SEVERITY}" \
-          "${ZOONER_PATH}"
+          --format "${ZIZMOR_FORMAT}" \
+          --persona "${ZIZMOR_PERSONA}" \
+          --min-severity "${ZIZMOR_MIN_SEVERITY}" \
+          "${ZIZMOR_PATH}"
         exit_code=$?
         echo "exit_code=${exit_code}" >> "${GITHUB_OUTPUT}"
-        if [[ "${ZOONER_FAIL}" == "true" && ${exit_code} -ne 0 ]]; then
+        if [[ "${ZIZMOR_FAIL}" == "true" && ${exit_code} -ne 0 ]]; then
           exit "${exit_code}"
         fi

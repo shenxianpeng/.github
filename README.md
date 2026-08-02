@@ -252,9 +252,9 @@ jobs:
 
 ## Reusable Actions
 
-### [`zooner`](.github/actions/zooner/action.yml)
+### [`zizmor`](.github/actions/zizmor/action.yml)
 
-GitHub Actions security audit powered by [zizmor](https://github.com/woodruffw/zizmor).
+GitHub Actions security audit powered by [zizmor](https://github.com/zizmorcore/zizmor).
 Scans workflows and composite actions for security best practices: unpinned
 action references, credential persistence in artifacts, template injection,
 excessive permissions, and more. Findings are reported as PR annotations
@@ -264,12 +264,12 @@ Use it from any repository:
 
 ```yaml
 jobs:
-  zooner:
+  zizmor:
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - uses: shenxianpeng/.github/.github/actions/zooner@main
+      - uses: shenxianpeng/.github/.github/actions/zizmor@main
 ```
 
 | Input | Default | Description |
