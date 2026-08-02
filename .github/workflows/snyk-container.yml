@@ -25,7 +25,7 @@ jobs:
   snyk:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Run Snyk to check Docker image for vulnerabilities
       continue-on-error: true
       uses: snyk/actions/docker@master
@@ -39,6 +39,6 @@ jobs:
         args: --severity-threshold=${{ inputs.severity-threshold }} --file=${{ inputs.dockerfile }}
 
     - name: Upload result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v4
+      uses: github/codeql-action/upload-sarif@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
       with:
         sarif_file: snyk.sarif

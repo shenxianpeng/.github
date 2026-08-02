@@ -24,7 +24,7 @@ jobs:
       contents: read
     steps:
       - name: Run Community Radar
-        uses: shenxianpeng/repokeeper/radar@v1
+        uses: shenxianpeng/repokeeper/radar@df2cc86986f0cc3d29eb978813cffcaa22b4438b # v1.4.0
         with:
           repo: ${{ inputs.repo }}
           llm_api_key: ${{ secrets.deepseek_api_key }}
