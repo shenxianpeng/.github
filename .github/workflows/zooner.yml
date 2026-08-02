@@ -18,9 +18,12 @@ jobs:
   zooner:
     runs-on: ubuntu-latest
     steps:
+      # Local action references require the repository to be checked out first.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # Dogfood the Zooner action on this repository's own workflows.
       # Advisory mode (fail_on_error: false): findings show up as PR
       # annotations without blocking; set fail_on_error: true to enforce.
       - uses: ./.github/actions/zooner
         with:
+          checkout: false
           fail_on_error: false
