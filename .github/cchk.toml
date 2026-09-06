@@ -1,0 +1,6 @@
+# cchk.toml
+[commit]
+conventional_commits = true
+
+[branch]
+conventional_branch = true  # false if branch names are free-form
