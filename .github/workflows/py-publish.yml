@@ -2,6 +2,13 @@ name: Build and publish python package
 
 on:
   workflow_call:
+    secrets:
+      PYPI_API_TOKEN:
+        required: true
+        description: PyPI API token used by the release publish step
+      TEST_PYPI_API_TOKEN:
+        required: false
+        description: TestPyPI API token used on workflow_dispatch runs
 
 permissions:
   contents: read
