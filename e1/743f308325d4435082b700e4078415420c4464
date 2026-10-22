@@ -1,0 +1,25 @@
+.github/workflows/main.yml
+  s_6535937731a8c8::t_76d42f51848572 9-11
+.github/workflows/pre-commit.yml
+  s_6535937731a8c8::t_5ba94b01163b4a 23-25
+.github/workflows/snyk-container.yml
+  s_6535937731a8c8::t_edba302ca3328b 31
+.github/workflows/sphinx.yml
+  s_6535937731a8c8::t_fff655e371f07b 7,24-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e1743f308325d4435082b700e4078415420c4464",
+  "prompts": {},
+  "sessions": {
+    "s_6535937731a8c8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7be933fd-3555-4179-bf89-3d88091b3193",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
