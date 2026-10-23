@@ -20,7 +20,9 @@ jobs:
           python-version: '3.x'
       - name: Run commands
         if: inputs.commands
-        run: ${{ inputs.commands }}
+        # The input *is* the shell script to run, supplied by the calling
+        # workflow in this account, so expanding it here is the intent.
+        run: ${{ inputs.commands }} # zizmor: ignore[template-injection]
       - name: Cache pre-commit environments
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
