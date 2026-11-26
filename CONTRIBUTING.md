@@ -1,31 +1,27 @@
 # Contributing
 
-Thank you for your interest in contributing! Here are a few guidelines to help get started.
+Thanks for your interest in contributing!
 
-## Getting Started
+This is the default guide for all of [@shenxianpeng](https://github.com/shenxianpeng)'s repositories.
+**If a repository has its own contributing guide, follow that one instead.**
 
-1. Fork the repository and create a new branch from `main`.
-2. Make your changes, following the conventions already in use.
-3. Open a pull request with a clear description of what you changed and why.
+## Issues
 
-## Reporting Bugs
+- Search existing issues before opening a new one.
+- Use the issue templates when available.
+- For security vulnerabilities, don't open a public issue. See [SECURITY.md](SECURITY.md).
 
-Please open an issue using the **Bug Report** template and include as much detail as possible.
+## Pull requests
 
-## Suggesting Features
+1. Fork the repository and create a branch from the default branch.
+2. Keep each PR focused on one change.
+3. Follow the existing code style and conventions of the repository.
+4. Run the project's own checks locally if it has any (tests, linters, pre-commit hooks, etc.).
+5. Update the docs if your change affects documented behavior.
+6. Describe what you changed and why in the PR. Link related issues.
 
-Please open an issue using the **Feature Request** template describing the problem you'd like to solve and your proposed solution.
+For anything non-trivial, consider opening an issue first to discuss the approach.
 
-## Pull Request Guidelines
+## License
 
-- Keep changes focused — one fix or feature per PR.
-- Ensure pre-commit checks pass locally before opening a PR (`pre-commit run --all-files`).
-- Update documentation when your change affects documented behavior.
-
-## Reusable Workflows
-
-If you are adding or modifying a reusable workflow under `.github/workflows/`, please ensure:
-
-- The workflow uses `on: workflow_call` so it can be called from other repositories.
-- All required secrets are declared in `secrets:` so callers know what to provide.
-- Inputs have sensible defaults where possible and are documented with `description:`.
+By contributing, you agree that your contributions will be licensed under the license of the repository you are contributing to.
