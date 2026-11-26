@@ -1,22 +1,25 @@
 # Security Policy
 
-## Supported Versions
+This is the default security policy for all of [@shenxianpeng](https://github.com/shenxianpeng)'s repositories.
+If a repository has its own `SECURITY.md`, that one takes precedence.
 
-Only the latest version on the `main` branch is actively maintained and receives security fixes.
+## Supported versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| latest  | :white_check_mark: |
+Unless a repository says otherwise, only the latest release (or the default branch, if there are no releases) receives security fixes.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-Please **do not** open a public issue to report a security vulnerability.
+Please **do not** report security vulnerabilities through public issues, discussions or pull requests.
 
-Instead, report it privately through GitHub's
-[Security Advisories](../../security/advisories/new) feature (click **Report a vulnerability**).
+1. Go to the **Security** tab of the affected repository and click **Report a vulnerability**.
+2. If that button isn't available, open an issue asking for a private contact channel. Don't include any vulnerability details in it.
 
-You can expect:
+Please include, if you can:
 
-- An acknowledgement within **48 hours**.
-- A status update within **7 days** indicating whether the vulnerability has been accepted or declined.
-- A patch or mitigation, followed by a public disclosure after the fix has been released.
+- The affected repository and version
+- Steps to reproduce or a proof of concept
+- The potential impact
+
+## What to expect
+
+This is a personal open-source account maintained on a best-effort basis. I'll acknowledge your report as soon as I can, keep you updated on progress, and credit you in the advisory once a fix is released, unless you'd prefer not to be credited.
